@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hidden { display: none; }
+        .dropdown-content { position: absolute; background-color: white; border: 1px solid #ccc; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); z-index: 10; }
+    </style>
+</head>
+<body>
+    <div class="rounded-lg border bg-card text-card-foreground shadow-sm max-w-4xl mx-auto p-6 sm:p-8 md:p-10">
+        <div class="flex flex-col space-y-1.5 p-6">
+            <div class="flex items-center justify-between">
+                <h3 class="whitespace-nowrap tracking-tight text-3xl font-bold">Profile</h3>
+                <div class="flex items-center gap-2">
+                    <button id="farmerBtn" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-10 px-4 py-2 bg-blue-500 text-white">
+                        Farmer
+                    </button>
+                    <button id="distributorBtn" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 h-10 px-4 py-2 bg-gray-200 text-black">
+                        Distributor
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Farmer Section -->
+        <div id="farmerSection" class="p-6">
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Farmer form fields -->
+                <div class="grid gap-4">
+                    <div class="grid gap-2">
+                        <label class="text-sm font-medium leading-none" for="name">Name</label>
+                        <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" id="name" placeholder="Enter your name" />
+                    </div>
+                    <div class="grid gap-2">
+                        <label class="text-sm font-medium leading-none" for="crops">Crops Offered</label>
+                        <button id="cropsDropdownBtn" type="button" class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                            <span id="selectedCrops">Select crops</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 opacity-50" aria-hidden="true">
+                                <path d="m6 9 6 6 6-6"></path>
+                            </svg>
+                        </button>
+                        <ul id="cropsDropdown" class="hidden dropdown-content">
+                            <li><a href="#" class="block px-4 py-2 text-sm" data-value="Wheat">Wheat</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-sm" data-value="Paddy">Paddy</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-sm" data-value="Maize">Maize</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-sm" data-value="Barley">Barley</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-sm" data-value="Jowar">Jowar</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-sm" data-value="Arhar">Arhar</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-sm" data-value="Moong">Moong</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-sm" data-value="Urad">Urad</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-sm" data-value="Chickpea">Chickpea</a></li>
+                            <li><a href="#" class="block px-4 py-2 text-sm" data-value="Lentil">Lentil</a></li>
+                        </ul>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium leading-none" for="land-size">Land Size</label>
+                            <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" id="land-size" placeholder="Enter your land size" type="number" />
+                        </div>
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium leading-none" for="state">State</label>
+                            <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" id="state" placeholder="Enter your state" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium leading-none" for="city">City</label>
+                            <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" id="city" placeholder="Enter your city" />
+                        </div>
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium leading-none" for="age">Age</label>
+                            <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" id="age" placeholder="Enter your age" type="number" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium leading-none" for="gender">Gender</label>
+                            <button id="genderDropdownBtn" type="button" class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
+                                <span id="selectedGender">Select gender</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 opacity-50" aria-hidden="true">
+                                    <path d="m6 9 6 6 6-6"></path>
+                                </svg>
+                            </button>
+                            <ul id="genderDropdown" class="hidden dropdown-content">
+                                <li><a href="#" class="block px-4 py-2 text-sm" data-value="Male">Male</a></li>
+                                <li><a href="#" class="block px-4 py-2 text-sm" data-value="Female">Female</a></li>
+                                <li><a href="#" class="block px-4 py-2 text-sm" data-value="Other">Other</a></li>
+                            </ul>
+                        </div>
+                        <div class="grid gap-2">
+                            <label class="text-sm font-medium leading-none" for="village">Village</label>
+                            <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" id="village" placeholder="Enter your village" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Distributor Section -->
+        <div id="distributorSection" class="p-6 hidden">
+            <!-- Distributor content -->
+            <p>Distributor content goes here.</p>
+        </div>
+    </div>
+    <script>
+        // Switching between Farmer and Distributor sections
+        const farmerBtn = document.getElementById('farmerBtn');
+        const distributorBtn = document.getElementById('distributorBtn');
+        const farmerSection = document.getElementById('farmerSection');
+        const distributorSection = document.getElementById('distributorSection');
+
+        farmerBtn.addEventListener('click', () => {
+            farmerSection.classList.remove('hidden');
+            distributorSection.classList.add('hidden');
+            farmerBtn.classList.add('bg-blue-500', 'text-white');
+            distributorBtn.classList.add('bg-gray-200', 'text-black');
+            distributorBtn.classList.remove('bg-blue-500', 'text-white');
+        });
+
+        distributorBtn.addEventListener('click', () => {
+            farmerSection.classList.add('hidden');
+            distributorSection.classList.remove('hidden');
+            distributorBtn.classList.add('bg-blue-500', 'text-white');
+            farmerBtn.classList.add('bg-gray-200', 'text-black');
+            farmerBtn.classList.remove('bg-blue-500', 'text-white');
+        });
+
+        // Dropdown functionality
+        const cropsDropdownBtn = document.getElementById('cropsDropdownBtn');
+        const cropsDropdown = document.getElementById('cropsDropdown');
+        const selectedCrops = document.getElementById('selectedCrops');
+
+        cropsDropdownBtn.addEventListener('click', () => {
+            cropsDropdown.classList.toggle('hidden');
+        });
+
+        cropsDropdown.addEventListener('click', (event) => {
+            if (event.target.tagName === 'A') {
+                selectedCrops.textContent = event.target.textContent;
+                cropsDropdown.classList.add('hidden');
+            }
+        });
+
+        const genderDropdownBtn = document.getElementById('genderDropdownBtn');
+        const genderDropdown = document.getElementById('genderDropdown');
+        const selectedGender = document.getElementById('selectedGender');
+
+        genderDropdownBtn.addEventListener('click', () => {
+            genderDropdown.classList.toggle('hidden');
+        });
+
+        genderDropdown.addEventListener('click', (event) => {
+            if (event.target.tagName === 'A') {
+                selectedGender.textContent = event.target.textContent;
+                genderDropdown.classList.add('hidden');
+            }
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!cropsDropdownBtn.contains(event.target) && !cropsDropdown.contains(event.target)) {
+                cropsDropdown.classList.add('hidden');
+            }
+            if (!genderDropdownBtn.contains(event.target) && !genderDropdown.contains(event.target)) {
+                genderDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

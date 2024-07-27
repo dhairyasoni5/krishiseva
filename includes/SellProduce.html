@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Crop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        const cropData = {
+            'Cereals': {
+                'Wheat': 2015,
+                'Paddy': 1940,
+                'Maize': 1962,
+                'Barley': 1635,
+                'Jowar': 2738
+            },
+            'Pulses': {
+                'Arhar': 6300,
+                'Moong': 7275,
+                'Urad': 6300,
+                'Chickpea': 5230,
+                'Lentil': 5500
+            },
+            'Oilseeds': {
+                'Groundnut': 5850,
+                'Soybean': 4300,
+                'Sunflower': 6400,
+                'Mustard': 5050,
+                'Sesame': 7307
+            },
+            'Commercial Crops': {
+                'Cotton': 6080,
+                'Jute': 4750,
+                'Sugarcane': 290 // per quintal
+            }
+        };
+
+        function updateCropNames() {
+            const cropType = document.getElementById('crop-type').value;
+            const cropNameSelect = document.getElementById('crop-name');
+            const mspSpan = document.getElementById('msp');
+
+            // Clear existing options
+            cropNameSelect.innerHTML = '<option value="">Select crop</option>';
+            mspSpan.textContent = 'Not available';
+
+            if (cropType in cropData) {
+                // Add crop names to dropdown
+                for (const cropName in cropData[cropType]) {
+                    const option = document.createElement('option');
+                    option.value = cropName;
+                    option.textContent = cropName;
+                    cropNameSelect.appendChild(option);
+                }
+            }
+        }
+
+        function updateMSP() {
+            const cropType = document.getElementById('crop-type').value;
+            const cropName = document.getElementById('crop-name').value;
+            const mspSpan = document.getElementById('msp');
+
+            if (cropType in cropData && cropName in cropData[cropType]) {
+                const msp = cropData[cropType][cropName];
+                mspSpan.textContent = msp;
+                document.getElementById('price').min = msp;
+            } else {
+                mspSpan.textContent = 'Not available';
+            }
+        }
+
+        function validatePrice() {
+            const price = parseFloat(document.getElementById('price').value);
+            const msp = parseFloat(document.getElementById('msp').textContent);
+            if (!isNaN(msp) && price < msp) {
+                alert(`The price cannot be lower than the MSP of ₹${msp}`);
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-green-600">List Your Crop</h1>
+            <a href="../trial.php" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Home</a>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <form action="sell_produce.php" method="post" enctype="multipart/form-data" onsubmit="return validatePrice()">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="crop-type" class="block text-sm font-medium text-gray-700 mb-2">Crop Type</label>
+                        <select id="crop-type" name="crop-type" required onchange="updateCropNames()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <option value="">Select crop type</option>
+                            <option value="Cereals">Cereals</option>
+                            <option value="Pulses">Pulses</option>
+                            <option value="Oilseeds">Oilseeds</option>
+                            <option value="Commercial Crops">Commercial Crops</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="crop-name" class="block text-sm font-medium text-gray-700 mb-2">Crop Name</label>
+                        <select id="crop-name" name="crop-name" required onchange="updateMSP()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <option value="">Select crop</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">Quantity Available (kg)</label>
+                        <input type="number" id="quantity" name="quantity" required min="1" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Price per kg (₹)</label>
+                        <div class="relative">
+                            <input type="number" id="price" name="price" step="0.01" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                                MSP: ₹<span id="msp">Not available</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="harvest-date" class="block text-sm font-medium text-gray-700 mb-2">Harvest Date</label>
+                        <input type="date" id="harvest-date" name="harvest-date" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label for="contact" class="block text-sm font-medium text-gray-700 mb-2">Contact Number</label>
+                        <input type="tel" id="contact" name="contact" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <!-- New Location Field -->
+                    <div>
+                        <label for="location" class="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                        <input type="text" id="location" name="location" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                    <textarea id="description" name="description" rows="4" placeholder="Describe the quality, growing conditions, or any other relevant details about your crop" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+                </div>
+                
+                <div class="mt-6">
+                    <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Crop Image</label>
+                    <input type="file" id="image" name="image" accept="image/*" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                
+                <div class="mt-8">
+                    <button type="submit" class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                        List Crop
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

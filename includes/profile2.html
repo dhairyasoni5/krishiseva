@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultural Connection Portal - Registration</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Agricultural Connection Portal - Registration</h2>
+        
+        <!-- Tabs for Farmer and Distributor Registration -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="farmer-tab" data-toggle="tab" href="#farmer" role="tab" aria-controls="farmer" aria-selected="true">Farmer Registration</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="distributor-tab" data-toggle="tab" href="#distributor" role="tab" aria-controls="distributor" aria-selected="false">Distributor Registration</a>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-3" id="myTabContent">
+            <!-- Farmer Registration Form -->
+            <div class="tab-pane fade show active" id="farmer" role="tabpanel" aria-labelledby="farmer-tab">
+                <form action="regdata.php" method="POST">
+                    <div class="form-group">
+                        <label for="farmerName">Name</label>
+                        <input type="text" class="form-control" id="farmerName" name="farmerName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="farmerAge">Age</label>
+                        <input type="number" class="form-control" id="farmerAge" name="farmerAge" placeholder="Enter your age" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="farmerGender">Gender</label>
+                        <select class="form-control" id="farmerGender" name="farmerGender" required>
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="farmerState">State</label>
+                        <input type="text" class="form-control" id="farmerState" name="farmerState" placeholder="Enter your state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="farmerDistrict">District</label>
+                        <input type="text" class="form-control" id="farmerDistrict" name="farmerDistrict" placeholder="Enter your district" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="farmerVillage">Village</label>
+                        <input type="text" class="form-control" id="farmerVillage" name="farmerVillage" placeholder="Enter your village" required>
+                    </div>
+                    
+                    
+                    <button type="submit" class="btn btn-primary">Register as Farmer</button>
+                </form>
+            </div>
+
+            <!-- Distributor Registration Form -->
+            <div class="tab-pane fade" id="distributor" role="tabpanel" aria-labelledby="distributor-tab">
+                <form action="register_distributor.php" method="POST">
+                    <div class="form-group">
+                        <label for="distributorName">Name</label>
+                        <input type="text" class="form-control" id="distributorName" name="distributorName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="distributorCompany">Company Name</label>
+                        <input type="text" class="form-control" id="distributorCompany" name="distributorCompany" placeholder="Enter your company name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="distributorState">State</label>
+                        <input type="text" class="form-control" id="distributorState" name="distributorState" placeholder="Enter your state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="distributorDistrict">District</label>
+                        <input type="text" class="form-control" id="distributorDistrict" name="distributorDistrict" placeholder="Enter your district" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="distributorContact">Contact Number</label>
+                        <input type="tel" class="form-control" id="distributorContact" name="distributorContact" placeholder="Enter your contact number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="distributorBankName">Bank Name</label>
+                        <input type="text" class="form-control" id="distributorBankName" name="distributorBankName" placeholder="Enter your bank name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="distributorBankAccount">Bank Account Number</label>
+                        <input type="text" class="form-control" id="distributorBankAccount" name="distributorBankAccount" placeholder="Enter your bank account number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="distributorIFSC">IFSC Code</label>
+                        <input type="text" class="form-control" id="distributorIFSC" name="distributorIFSC" placeholder="Enter your bank IFSC code" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register as Distributor</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
